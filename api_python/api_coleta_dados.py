@@ -35,6 +35,9 @@ while True:
     memoriaDisponivel = round(vm.available*(2**-30),2) 
 
     fkComputador = 1
+    fkEmpresa = 1
+
+    meu_so = platform.system()
     
 
 # SIMULATION
@@ -63,10 +66,12 @@ while True:
 
     while True:
         # comando para inserir os dados das variaveis no banco
-        sql = "INSERT INTO Leitura(fk_computador, data_hora,cpu_porcentagem, disco_usado, memoria_usada, memoria_disponivel, memoria_total, disco_total, sistema_operacional, cpu_nucleos_logicos, cpu_nucleos_fisicos) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-        values=[fkComputador, dataHora, percentualCpu, discoUsado, memoriaUsada, memoriaDisponivel, memoriaTotal, discoTotal, meu_so, cpuLogicos, cpuFisicos]
+        sql = "INSERT INTO Leitura(fk_computador, data_hora,cpu_porcentagem, disco_usado, memoria_usada, memoria_disponivel) VALUES (%s,%s,%s,%s,%s,%s)"
+        sql2 = "INSERT INTO computador(fk_empresa, memoria_total, disco_total, sistema_operacional, cpu_nucleos_logicos, cpu_nucleos_fisicos) VALUES (%s,%s,%s,%s,%s,%s)"
+        values=[fkComputador, dataHora, percentualCpu, discoUsado, memoriaUsada, memoriaDisponivel]
+        values2=[fkEmpresa, memoriaTotal, discoTotal, meu_so, cpuLogicos, cpuFisicos]
         cursor.execute(sql,values)
-        meu_so = platform.system()
+        cursor.execute(sql2,values2)
         print("SO que eu uso : ",meu_so)
         print(cursor.rowcount,"record inserted")
         break
