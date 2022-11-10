@@ -8,6 +8,15 @@ psutil.cpu_percent()
 discoTotal = round(psutil.disk_usage('/').total*(2**-30),2)
 memoriaTotal = round(psutil.virtual_memory().total*(2**-30),2)
 
+config = {
+  'host':'<turi.database.windows.net>.mysql.database.azure.com',
+  'user':'<adm-turi>@<mydemoserver>',
+  'password':'<Urubu1002>',
+  'database':'<Turi>',
+  'client_flags': [mysql.connector.ClientFlag.SSL],
+  'ssl_ca': '<path-to-SSL-cert>/DigiCertGlobalRootG2.crt.pem'
+}
+
 while True:
     try:
         con = mysql.connector.connect(
@@ -36,7 +45,7 @@ while True:
 
     fkComputador = 1
     fkEmpresa = 1
-
+#OPERATIONAL SYSTEM
     meu_so = platform.system()
     
 
